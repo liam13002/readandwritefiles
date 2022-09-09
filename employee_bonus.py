@@ -17,7 +17,7 @@ for record in csvfile:
         print("ID:", record[0])
         print("First name:", record[1])
         print("Last name:", record[2])
-        print("Salary: $", pay,  sep="")
+        print("Salary: $", format(pay, ',.2f'),  sep="")
         print("Bonus:", record[4])
         print("Total Pay: $", total_pay, sep="")
         input("Press enter for next customer:")

@@ -1,96 +1,44 @@
 import csv
+infile =open('steps.csv', 'r')
+csvfile = csv.reader(infile, delimiter=',')
+next(csvfile)
+outfile =open("avg_steps.csv","w")
 
-infile=open("steps.csv","r")
-outfile=open("avg_steps.csv","w")
+months = ['Dummy','January', 'February', 'March', 'April', 'May', 'June', 'July',
+         'August', 'September', 'October', 'November', 'December']
 
-csvfile_old=csv.reader(infile, delimiter=',')
-csvfile_new=csv.reader(outfile, delimiter=',')
+days = (0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
 
-csvinput=csv.writer(outfile)
+month = 1
+total_steps = 0
 
-infile.readline()
 
-num_days=0
 
-total_steps=0
+for rec in csvfile:
+    
+   
 
-for record in csvfile_old:
-    steps=int(record[1])
+    if rec[0] == str(month):
+        total_steps+= int(rec[1])
+    else:
+        
+        average = format((total_steps / days[month]), '.2f')
+        outfile.write(months[month])
+        outfile.write(': ')
+        outfile.write(str(average))
+        outfile.write('\n')
+        month += 1
+        total_steps = int(rec[1])
+average = format((total_steps / days[month]), '.2f')
+outfile.write(months[month])
+outfile.write(': ')
+outfile.write(str(average))
+outfile.write('\n')
 
-    if record[0]=="1":
-        num_days+=record.count(record[0])
-        total_steps+=steps
-        avg_steps1=total_steps/num_days
+
 
         
-
-    if record[0]=="2":
-        num_days+=record.count(record[0])
-        total_steps+=steps
-        avg_steps2=total_steps/num_days
     
-    if record[0]=="3":
-        num_days+=record.count(record[0])
-        total_steps+=steps
-        avg_steps3=total_steps/num_days
-    
-    if record[0]=="4":
-        num_days+=record.count(record[0])
-        total_steps+=steps
-        avg_steps4=total_steps/num_days
-
-    if record[0]=="5":
-        num_days+=record.count(record[0])
-        total_steps+=steps
-        avg_steps5=total_steps/num_days
-    
-    if record[0]=="6":
-        num_days+=record.count(record[0])
-        total_steps+=steps
-        avg_steps6=total_steps/num_days
-    
-    if record[0]=="7":
-        num_days+=record.count(record[0])
-        total_steps+=steps
-        avg_steps7=total_steps/num_days
-
-    if record[0]=="8":
-        num_days+=record.count(record[0])
-        total_steps+=steps
-        avg_steps8=total_steps/num_days
-
-    if record[0]=="9":
-        num_days+=record.count(record[0])
-        total_steps+=steps
-        avg_steps9=total_steps/num_days
-
-    if record[0]=="10":
-        num_days+=record.count(record[0])
-        total_steps+=steps
-        avg_steps10=total_steps/num_days
-    
-    if record[0]=="11":
-        num_days+=record.count(record[0])
-        total_steps+=steps
-        avg_steps11=total_steps/num_days
-    
-    if record[0]=="12":
-        num_days+=record.count(record[0])
-        total_steps+=steps
-        avg_steps12=total_steps/num_days
-
-csvinput.writerow(["January",avg_steps1])
-csvinput.writerow(["February",avg_steps2])
-csvinput.writerow(["March",avg_steps3])
-csvinput.writerow(["April",avg_steps4])
-csvinput.writerow(["May",avg_steps5])
-csvinput.writerow(["June",avg_steps6])
-csvinput.writerow(["July",avg_steps7])
-csvinput.writerow(["August",avg_steps8])
-csvinput.writerow(["September",avg_steps9])
-csvinput.writerow(["October",avg_steps10])
-csvinput.writerow(["November",avg_steps11])
-csvinput.writerow(["December",avg_steps12])
-
-
 outfile.close()
+
+
