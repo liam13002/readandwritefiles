@@ -24,14 +24,14 @@ for rec in csvfile:
         
         average = format((total_steps / days[month]), '.2f')
         outfile.write(months[month])
-        outfile.write(': ')
+        outfile.write(', ')
         outfile.write(str(average))
         outfile.write('\n')
         month += 1
         total_steps = int(rec[1])
 average = format((total_steps / days[month]), '.2f')
 outfile.write(months[month])
-outfile.write(': ')
+outfile.write(', ')
 outfile.write(str(average))
 outfile.write('\n')
 
